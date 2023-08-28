@@ -43,6 +43,9 @@ function displayCities(data) {
 
 optionList.addEventListener('click', function selectCity(event) {
     console.log(event.target);
+    var selected = event.target;
+    var lat = selected.getAttribute('data-lat');
+    var lon = selected.getAttribute('data-lon');
 
 
 

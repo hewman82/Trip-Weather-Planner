@@ -80,3 +80,15 @@ form {
     background-color:antiquewhite;
 }
 
+#search ul {
+    list-style-type: none;
+}
+
+#search li {
+    padding: 5px;
+}
+
+#search li:hover {
+    background-color: antiquewhite;
+    cursor: pointer;
+}
