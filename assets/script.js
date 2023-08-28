@@ -3,6 +3,10 @@ var currWeatherHead = document.querySelector('#current-date');
 var currTempText = document.querySelector('#current-temp');
 var currWindText = document.querySelector('#current-wind');
 var currHumText = document.querySelector('#current-humidity');
+var forecastDateText = document.querySelectorAll('.date');
+var forecastTempText = document.querySelectorAll('.temp');
+var forecastWindText = document.querySelectorAll('.wind');
+var forecastHumText = document.querySelectorAll('.humidity')
 var searchCard = document.querySelector('#search');
 var searchBtn = document.querySelector('#search-btn');
 var searchBar = document.querySelector('#search-bar');
@@ -31,7 +35,6 @@ function getCoordinates(searchText) {
 }
 
 function displayCities(data) {
-    console.log(data);
     for(i = 0; i < data.length; i++) {
         var cityName = data[i].name;
         var stateName = data[i].state;
@@ -51,7 +54,7 @@ optionList.addEventListener('click', function selectCity(event) {
     var lat = selected.getAttribute('data-lat');
     var lon = selected.getAttribute('data-lon');
     getWeather(lat,lon);
-    /*getForecast(lat, lon);*/
+    getForecast(lat, lon);
 
 });
 
@@ -70,7 +73,6 @@ function getWeather(lat, lon) {
 }
 
 function displayCurrentWeather(data) {
-    console.log(data);
     var name = data.name;
     var currDate = dayjs.unix(data.dt).format(' (M, DD, YYYY)');
     var currTemp = data.main.temp;
@@ -79,7 +81,7 @@ function displayCurrentWeather(data) {
 
     currWeatherHead.textContent = name + currDate;
     currTempText.textContent = 'Temperature: ' + currTemp + '°F';
-    currWindText.textContent = 'Wind Speed: ' + currWind + ' mi/hr';
+    currWindText.textContent = 'Wind Speed: ' + currWind + ' MPH';
     currHumText.textContent = 'Humidity: ' + currHum + '%';
 }
 
@@ -90,9 +92,26 @@ function getForecast(lat, lon) {
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                displayForecast(data);
             });
         } else { alert(response.status); }
         
     });
+}
+
+function displayForecast(data) {
+    var m = 8;
+    for(i = 0; i < 5; i++){
+        var date = data.list[m].dt;
+        console.log(date);
+        var temp = data.list[m].main.temp;
+        var wind = data.list[m].wind.speed;
+        var humidity = data.list[m].main.humidity;
+
+        forecastDateText[i].textContent = dayjs.unix(date).format('M, DD, YYYY');
+        forecastTempText[i].textContent = 'Temp: ' + temp + '°F';
+        forecastWindText[i].textContent = 'Wind: ' + wind + ' MPH';
+        forecastHumText[i].textContent = 'Humidity: ' + humidity + '%';
+        m = m + 7;
+    }
 }

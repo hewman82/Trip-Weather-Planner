@@ -26,11 +26,15 @@ header {
     color: black;
 }
 
+#current-weather p {
+    font-size: larger;
+}
+
 .forecast {
     display: flex;
     position: absolute;
     top: 350px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .forecast h3 {
@@ -41,11 +45,11 @@ header {
 
 .forecast card {
     position: relative;
-    right: 110px;
+    right: 165px;
     background-color: antiquewhite;
     margin: 10px;
-    width: 160px;
-    padding: 10px;
+    width: 175px;
+    padding: 15px;
     color: var(--darkblue);
 }
 
