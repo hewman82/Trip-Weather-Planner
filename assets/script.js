@@ -100,7 +100,7 @@ function displayHistory() {
 }
 
 function getWeather(lat, lon) {
-    var currentWeatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
+    var currentWeatherAPI = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
 
     fetch(currentWeatherAPI)
     .then(function(response) {
@@ -144,7 +144,7 @@ function displayCurrentWeather(data) {
 }
 
 function getForecast(lat, lon) {
-    var weatherForecastAPI = 'http://api.openweathermap.org/data/2.5/forecast/?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
+    var weatherForecastAPI = 'https://api.openweathermap.org/data/2.5/forecast/?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
 
     fetch(weatherForecastAPI)
     .then(function(response) {
