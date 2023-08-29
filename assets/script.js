@@ -73,6 +73,7 @@ function getCoordinates(searchText) {
 }
 
 function displayCities(data) {
+    optionList.innerHTML = '';
     for(i = 0; i < data.length; i++) {
         var cityName = data[i].name;
         var stateName = data[i].state;
@@ -126,7 +127,7 @@ function displayCurrentWeather(data) {
     } else if(data.weather[0].main === 'Snow') {
         var icon = '❄️';
     } else if(data.weather[0].main === 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Ash' || 'Squall') {
-        var icon = '❄️';
+        var icon = '🌫️';
     } else if(data.weather[0].main === 'Tornado'){
         var icon = '🌪️';
     } 
@@ -159,7 +160,7 @@ function getForecast(lat, lon) {
 
 function displayForecast(data) {
     var m = 6;
-    for(i = 0; i < 5; i++){
+    for(i = 0; i < 6; i++){
         var date = data.list[m].dt;
         var temp = data.list[m].main.temp;
         var wind = data.list[m].wind.speed;
@@ -177,18 +178,17 @@ function displayForecast(data) {
         } else if(data.list[m].weather[0].main === 'Snow') {
             var icon = '❄️';
         } else if(data.list[m].weather[0].main === 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Ash' || 'Squall') {
-            var icon = '❄️';
+            var icon = '🌫️';
         } else if(data.list[m].weather[0].main === 'Tornado'){
             var icon = '🌪️';
-        } 
+        }
 
         forecastDateText[i].textContent = dayjs.unix(date).format('M, DD, YYYY') + ' ' + icon;
         forecastTempText[i].textContent = 'Temp: ' + temp + '°F';
         forecastWindText[i].textContent = 'Wind: ' + wind + ' MPH';
         forecastHumText[i].textContent = 'Humidity: ' + humidity + '%';
-        m = m + 7;
+        m = m + 8;
     }
-
 }
 
 init();

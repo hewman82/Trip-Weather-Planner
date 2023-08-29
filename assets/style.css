@@ -1,15 +1,28 @@
-:root {
-    --darkblue: rgb(8, 5, 144);
-}
-
 header {
-    background-color: rgba(59, 165, 246, .75);
-    color: var(--darkblue);
+    background-color: rgba(59, 165, 246, .5);
+    color: darkblue;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Abril Fatface', cursive;
-    height: 100px;
+    height: 70px;
+    border: 2px solid rgb(59, 165, 246);
+}
+
+.rainbow {
+    position: relative;
+    left: 165px;
+}
+
+.globe {
+    position: relative;
+    right: 25px;
+}
+
+.bar {
+    background-color: darkblue;
+    height: 20px;
+    border-bottom: 2px solid rgb(59, 165, 246);
 }
 
 #current-weather {
@@ -19,7 +32,7 @@ header {
     left: 100px;
     width: 850px;
     padding: 10px;
-    color: var(--darkblue);
+    color: darkblue;
 }
 
 #current-weather h2 {
@@ -46,11 +59,12 @@ header {
 .forecast card {
     position: relative;
     right: 165px;
-    background-color: rgba(250, 235, 215, .5);
+    background-color: rgba(250, 235, 215, .3);
     margin: 10px;
     width: 175px;
     padding: 15px;
-    color: var(--darkblue);
+    color: darkblue;
+    border: 2px solid black;
 }
 
 .forecast h4 {
@@ -61,7 +75,7 @@ header {
 #search {
     border: 2px solid black;
     position: absolute;
-    top: 100px;
+    top: 90px;
     right: 0px;
     width: 350px;
     height: 667px;
@@ -74,13 +88,13 @@ form {
 
 #search-bar {
     margin-top: 30px;
-    width: 250px;
+    width: 275px;
     height: 35px;
 }
 
 #search-btn {
     margin-top: 20px;
-    width: 250px;
+    width: 275px;
     height: 35px;
     background-color:antiquewhite;
 }
@@ -91,6 +105,7 @@ form {
 
 #search li {
     padding: 5px;
+    width: 275px;
 }
 
 #search li:hover {
@@ -100,4 +115,6 @@ form {
 
 .search-history li {
     background-color: lightgray;
+    margin-top: 5px;
+    width: 275px;
 }
