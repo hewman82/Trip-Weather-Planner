@@ -11,12 +11,43 @@ var searchCard = document.querySelector('#search');
 var searchBtn = document.querySelector('#search-btn');
 var searchBar = document.querySelector('#search-bar');
 var optionList = document.createElement('ul');
+var searches = [];
+
+var searchHistoryUl = document.createElement('ul');
+searchHistoryUl.setAttribute('class', 'search-history');
 searchCard.appendChild(optionList);
+searchCard.appendChild(searchHistoryUl);
+
+function init() {
+    var searchHistory = JSON.parse(localStorage.getItem('searched'));
+    console.log(searchHistory);
+    if (searchHistory !== null) {
+        searches = searchHistory;
+    }
+    displayHistory();
+}
 
 searchBtn.addEventListener('click', function(e) {
     e.preventDefault();
     var searchText = searchBar.value;
     getCoordinates(searchText);
+});
+
+optionList.addEventListener('click', function selectCity(event) {
+    var city = event.target.innerHTML;
+    var lat = event.target.getAttribute('data-lat');
+    var lon = event.target.getAttribute('data-lon');
+    var searched = {
+        'city': city,
+        'lat': lat,
+        'lon': lon,
+    }
+    searches.push(searched);
+    localStorage.setItem('searched', JSON.stringify(searches));
+
+    displayHistory();
+    getWeather(lat,lon);
+    getForecast(lat, lon);
 
 });
 
@@ -39,24 +70,23 @@ function displayCities(data) {
         var cityName = data[i].name;
         var stateName = data[i].state;
         var countryName = data[i].country;
-        
         var optionEl = document.createElement('li');
         optionEl.textContent = cityName + ", " + stateName + ', ' + countryName;
         optionEl.setAttribute('data-lat', data[i].lat);
         optionEl.setAttribute('data-lon', data[i].lon);
-
         optionList.appendChild(optionEl);
     }
 }
 
-optionList.addEventListener('click', function selectCity(event) {
-    var selected = event.target;
-    var lat = selected.getAttribute('data-lat');
-    var lon = selected.getAttribute('data-lon');
-    getWeather(lat,lon);
-    getForecast(lat, lon);
-
-});
+function displayHistory() {
+    searchHistoryUl.innerHTML = '';
+    optionList.innerHTML = '';
+    for(i = 0; i < searches.length; i++) {
+        var searchEl = document.createElement('li');
+        searchEl.textContent = searches[i].city;
+        searchHistoryUl.appendChild(searchEl);
+    }
+}
 
 function getWeather(lat, lon) {
     var currentWeatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
@@ -68,7 +98,6 @@ function getWeather(lat, lon) {
                 displayCurrentWeather(data);
             });
         } else { alert(response.status); }
-        
     });
 }
 
@@ -103,7 +132,6 @@ function displayForecast(data) {
     var m = 8;
     for(i = 0; i < 5; i++){
         var date = data.list[m].dt;
-        console.log(date);
         var temp = data.list[m].main.temp;
         var wind = data.list[m].wind.speed;
         var humidity = data.list[m].main.humidity;
@@ -115,3 +143,5 @@ function displayForecast(data) {
         m = m + 7;
     }
 }
+
+init();
