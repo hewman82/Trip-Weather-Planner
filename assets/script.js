@@ -1,5 +1,6 @@
 var currWeatherCard = document.querySelector('#current-weather');
 var currWeatherHead = document.querySelector('#current-date');
+var currIcon = document.querySelector('#curr-icon');
 var currTempText = document.querySelector('#current-temp');
 var currWindText = document.querySelector('#current-wind');
 var currHumText = document.querySelector('#current-humidity');
@@ -20,7 +21,6 @@ searchCard.appendChild(searchHistoryUl);
 
 function init() {
     var searchHistory = JSON.parse(localStorage.getItem('searched'));
-    console.log(searchHistory);
     if (searchHistory !== null) {
         searches = searchHistory;
     }
@@ -105,6 +105,7 @@ function getWeather(lat, lon) {
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
+                console.log(data);
                 displayCurrentWeather(data);
             });
         } else { alert(response.status); }
@@ -112,25 +113,43 @@ function getWeather(lat, lon) {
 }
 
 function displayCurrentWeather(data) {
+    if(data.weather[0].main === 'Clear') {
+        var icon = '☀️';
+    } else if(data.weather[0].main === 'Clouds') {
+        var icon = '☁️';
+    } else if(data.weather[0].main === 'Drizzle') {
+        var icon = '🌦️';
+    } else if(data.weather[0].main === 'Rain') {
+        var icon = '🌧️';
+    } else if(data.weather[0].main === 'Thunderstorm') {
+        var icon = '🌩️';
+    } else if(data.weather[0].main === 'Snow') {
+        var icon = '❄️';
+    } else if(data.weather[0].main === 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Ash' || 'Squall') {
+        var icon = '❄️';
+    } else if(data.weather[0].main === 'Tornado'){
+        var icon = '🌪️';
+    } 
     var name = data.name;
     var currDate = dayjs.unix(data.dt).format(' (M, DD, YYYY)');
     var currTemp = data.main.temp;
     var currWind = data.wind.speed;
     var currHum = data.main.humidity;
 
-    currWeatherHead.textContent = name + currDate;
+    currWeatherHead.textContent = name + currDate + ' ' + icon;
     currTempText.textContent = 'Temperature: ' + currTemp + '°F';
     currWindText.textContent = 'Wind Speed: ' + currWind + ' MPH';
     currHumText.textContent = 'Humidity: ' + currHum + '%';
 }
 
 function getForecast(lat, lon) {
-    var weatherForecastAPI = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
+    var weatherForecastAPI = 'http://api.openweathermap.org/data/2.5/forecast/?lat=' + lat + '&lon=' + lon + '&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f&units=imperial';
 
     fetch(weatherForecastAPI)
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
+                console.log(data);
                 displayForecast(data);
             });
         } else { alert(response.status); }
@@ -139,19 +158,37 @@ function getForecast(lat, lon) {
 }
 
 function displayForecast(data) {
-    var m = 8;
+    var m = 6;
     for(i = 0; i < 5; i++){
         var date = data.list[m].dt;
         var temp = data.list[m].main.temp;
         var wind = data.list[m].wind.speed;
         var humidity = data.list[m].main.humidity;
+        if(data.list[m].weather[0].main === 'Clear') {
+            var icon = '☀️';
+        } else if(data.list[m].weather[0].main === 'Clouds') {
+            var icon = '☁️';
+        } else if(data.list[m].weather[0].main === 'Drizzle') {
+            var icon = '🌦️';
+        } else if(data.list[m].weather[0].main === 'Rain') {
+            var icon = '🌧️';
+        } else if(data.list[m].weather[0].main === 'Thunderstorm') {
+            var icon = '🌩️';
+        } else if(data.list[m].weather[0].main === 'Snow') {
+            var icon = '❄️';
+        } else if(data.list[m].weather[0].main === 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Ash' || 'Squall') {
+            var icon = '❄️';
+        } else if(data.list[m].weather[0].main === 'Tornado'){
+            var icon = '🌪️';
+        } 
 
-        forecastDateText[i].textContent = dayjs.unix(date).format('M, DD, YYYY');
+        forecastDateText[i].textContent = dayjs.unix(date).format('M, DD, YYYY') + ' ' + icon;
         forecastTempText[i].textContent = 'Temp: ' + temp + '°F';
         forecastWindText[i].textContent = 'Wind: ' + wind + ' MPH';
         forecastHumText[i].textContent = 'Humidity: ' + humidity + '%';
         m = m + 7;
     }
+
 }
 
 init();
