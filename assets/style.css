@@ -9,9 +9,14 @@ header {
     border: 2px solid rgb(59, 165, 246);
 }
 
+h1 {
+    position: relative;
+    left: 75px;
+}
+
 .rainbow {
     position: relative;
-    left: 165px;
+    left: 200px;
 }
 
 .globe {
@@ -33,6 +38,7 @@ header {
     width: 850px;
     padding: 10px;
     color: darkblue;
+    background-color: rgba(250, 235, 215, .3);
 }
 
 #current-weather h2 {
