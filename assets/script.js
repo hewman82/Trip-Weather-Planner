@@ -59,7 +59,7 @@ searchHistoryUl.addEventListener('click', function(e) {
 })
 
 function getCoordinates(searchText) {
-    var geocodeAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchText + '&limit=5&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f';
+    var geocodeAPI = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchText + '&limit=5&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f';
 
     fetch(geocodeAPI)
     .then(function(response) {
