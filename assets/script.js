@@ -160,7 +160,7 @@ function getForecast(lat, lon) {
 
 function displayForecast(data) {
     var m = 6;
-    for(i = 0; i < 6; i++){
+    for(i = 0; i < 5; i++){
         var date = data.list[m].dt;
         var temp = data.list[m].main.temp;
         var wind = data.list[m].wind.speed;
@@ -187,6 +187,7 @@ function displayForecast(data) {
         forecastTempText[i].textContent = 'Temp: ' + temp + '°F';
         forecastWindText[i].textContent = 'Wind: ' + wind + ' MPH';
         forecastHumText[i].textContent = 'Humidity: ' + humidity + '%';
+        console.log(data.list[m].dt);
         m = m + 8;
     }
 }
