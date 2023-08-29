@@ -33,10 +33,10 @@ searchBtn.addEventListener('click', function(e) {
     getCoordinates(searchText);
 });
 
-optionList.addEventListener('click', function selectCity(event) {
-    var city = event.target.innerHTML;
-    var lat = event.target.getAttribute('data-lat');
-    var lon = event.target.getAttribute('data-lon');
+optionList.addEventListener('click', function (e) {
+    var city = e.target.innerHTML;
+    var lat = e.target.getAttribute('data-lat');
+    var lon = e.target.getAttribute('data-lon');
     var searched = {
         'city': city,
         'lat': lat,
@@ -50,6 +50,13 @@ optionList.addEventListener('click', function selectCity(event) {
     getForecast(lat, lon);
 
 });
+
+searchHistoryUl.addEventListener('click', function(e) {
+    var lat = e.target.getAttribute('data-lat');
+    var lon = e.target.getAttribute('data-lon');
+    getWeather(lat,lon);
+    getForecast(lat,lon);
+})
 
 function getCoordinates(searchText) {
     var geocodeAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchText + '&limit=5&appid=7d6d7f71cbdd0e76a6f7fb3306fcce7f';
@@ -81,9 +88,12 @@ function displayCities(data) {
 function displayHistory() {
     searchHistoryUl.innerHTML = '';
     optionList.innerHTML = '';
+    console.log(searches);
     for(i = 0; i < searches.length; i++) {
         var searchEl = document.createElement('li');
         searchEl.textContent = searches[i].city;
+        searchEl.setAttribute('data-lat', searches[i].lat);
+        searchEl.setAttribute('data-lon', searches[i].lon);
         searchHistoryUl.appendChild(searchEl);
     }
 }
