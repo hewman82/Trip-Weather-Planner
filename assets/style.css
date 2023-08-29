@@ -8,17 +8,18 @@ header {
     height: 70px;
     border: 2px solid rgb(59, 165, 246);
 }
-
+/*icons to the right of the heading text*/
 .rainbow {
     position: relative;
     left: 275px;
+    font-size: 30px;
 }
-
+/*icon to the left of the heading text*/
 .globe {
     position: relative;
     right: 25px;
 }
-
+/*horizontal darkblue bar below header*/
 .bar {
     background-color: darkblue;
     height: 20px;
@@ -35,22 +36,22 @@ header {
     color: darkblue;
     background-color: rgba(250, 235, 215, .3);
 }
-
+/*contains city name, date, and weather icon*/
 #current-weather h2 {
     color: black;
 }
-
+/*contains current weather data*/
 #current-weather p {
     font-size: larger;
 }
-
+/*section containing forecast cards*/
 .forecast {
     display: flex;
     position: absolute;
     top: 350px;
     margin-top: 50px;
 }
-
+/*forecast section heading*/
 .forecast h3 {
     position: relative;
     top: -50px;
@@ -67,12 +68,12 @@ header {
     color: darkblue;
     border: 2px solid black;
 }
-
+/*forecast cards headings*/
 .forecast h4 {
     color: black;
     font-size: medium;
 }
-
+/*search card to the right of weather data*/
 #search {
     border: 2px solid black;
     position: absolute;
@@ -99,11 +100,11 @@ form {
     height: 35px;
     background-color:antiquewhite;
 }
-
+/*ul for city options li elements*/
 #search ul {
     list-style-type: none;
 }
-
+/*city options*/
 #search li {
     padding: 5px;
     width: 275px;
@@ -113,7 +114,7 @@ form {
     background-color: antiquewhite;
     cursor: pointer;
 }
-
+/*search history li elements*/
 .search-history li {
     background-color: lightgray;
     margin-top: 5px;
