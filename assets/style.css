@@ -9,14 +9,9 @@ header {
     border: 2px solid rgb(59, 165, 246);
 }
 
-h1 {
-    position: relative;
-    left: 75px;
-}
-
 .rainbow {
     position: relative;
-    left: 200px;
+    left: 275px;
 }
 
 .globe {
